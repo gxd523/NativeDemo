@@ -1,0 +1,47 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "com.gxd.demo.natived"
+        minSdk 26
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+
+        externalNativeBuild {
+            cmake {
+                cppFlags ''// cpp编译时的额外选项
+                abiFilters "armeabi-v7a", "arm64-v8a", "x86_64"// NDK17开始不再支持armeabi
+            }
+        }
+        packagingOptions {// 依赖库、jniLibs的so文件重复时，优先使用jniLibs下的so
+            pickFirst 'jniLibs/armeabi-v7a/aaa.so'
+            pickFirst 'jniLibs/arm64-v8a/aaa.so'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    externalNativeBuild {
+        cmake {
+            path file('src/main/cpp/CMakeLists.txt')
+            version '3.18.1'
+        }
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+}
