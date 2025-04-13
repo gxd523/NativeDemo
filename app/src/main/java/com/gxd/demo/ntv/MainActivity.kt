@@ -1,8 +1,8 @@
-package com.gxd.demo.natived
+package com.gxd.demo.ntv
 
 import android.app.Activity
 import android.os.Bundle
-import com.gxd.demo.natived.databinding.ActivityMainBinding
+import com.gxd.demo.ntv.databinding.ActivityMainBinding
 
 class MainActivity : Activity() {
     private lateinit var binding: ActivityMainBinding
@@ -18,15 +18,14 @@ class MainActivity : Activity() {
     }
 
     /**
-     * A native method that is implemented by the 'natived' native library,
-     * which is packaged with this application.
+     * A native method that is implemented by the 'hello' native library, which is packaged with this application.
      */
     external fun stringFromJNI(): String
 
     companion object {
-        // Used to load the 'natived' library on application startup.
+        // Used to load the 'hello' library on application startup.
         init {
-            System.loadLibrary("natived")
+            System.loadLibrary("hello")
         }
     }
 }
